@@ -1,0 +1,27 @@
+<div id="grid" class="grid">
+  <div class="cell" *ngFor="let cell of gridData; let i = index; trackBy: trackByFn" [attr.age]="cell" (click)="toggle(cell,i)">
+  </div>
+</div>
+<div class="controls">
+
+  <button type="button" (click)="placeRandom()">place random</button>
+  <button type="button" (click)="step()" [disabled]="running">step</button>
+  <button type="button" (click)="run()" [disabled]="running">run</button>
+  <button type="button" (click)="stop()" [disabled]="!running">stop</button>
+  <button type="button" (click)="reset()" [disabled]="running">reset</button>
+  <br>
+  <br>
+  <div>fps: {{fps}}</div>
+  <div>average fps: {{avgFps}}</div>
+  <div>steps: {{steps}}</div>
+  <br>
+  <br>
+  <p>
+    Click to add cells
+  </p>
+  <br>
+  <p>
+    Built with <b>Angular 4.4.6</b>
+  </p>
+
+</div>

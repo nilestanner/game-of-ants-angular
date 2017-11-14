@@ -1,0 +1,58 @@
+.grid {
+  display: grid;
+  grid-template-rows: repeat(100,1fr);
+  grid-template-columns: repeat(100,1fr);
+  height:900px;
+  width:900px;
+  float:left;
+  margin:10px;
+}
+
+/*.cell {
+  border: 1px black solid;
+}*/
+.cell:hover {
+  cursor:pointer;
+  box-shadow: 0px 0px 5px 2px rgb(157,220,21);
+}
+
+.controls {
+  padding-top: 30px;
+}
+
+[age]{
+  background-color: rgb(202,32,77);
+}
+
+[age="0"]{
+  background-color: black;
+}
+
+[age="1"]{
+  background-color: rgb(157,220,21);
+}
+
+[age="2"]{
+  background-color: rgb(255,213,57);
+}
+
+[age="3"]{
+  background-color: rgb(245,143,32);
+}
+
+button {
+  border: none;
+  text-transform: uppercase;
+  padding: 10px;
+  background-color: rgb(157,220,21);
+}
+
+button:hover{
+  cursor: pointer;
+  background-color: rgb(255,213,57);
+}
+
+button:disabled{
+  cursor: not-allowed;
+  background-color: rgb(245,143,32);
+}
