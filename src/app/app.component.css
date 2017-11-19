@@ -16,29 +16,25 @@
   box-shadow: 0px 0px 5px 2px rgb(157,220,21);
 }
 
+
+
+.cell {
+  background-color:black;
+}
+
 .controls {
   padding-top: 30px;
 }
 
-[age]{
-  background-color: rgb(202,32,77);
-}
-
-[age="0"]{
-  background-color: black;
-}
-
-[age="1"]{
+[ant="true"]{
   background-color: rgb(157,220,21);
 }
 
-[age="2"]{
-  background-color: rgb(255,213,57);
+.cell:not([pher="0"]):not([ant="true"]) {
+  background-color:rgb(202,32,77);
 }
 
-[age="3"]{
-  background-color: rgb(245,143,32);
-}
+
 
 button {
   border: none;
@@ -56,3 +52,8 @@ button:disabled{
   cursor: not-allowed;
   background-color: rgb(245,143,32);
 }
+
+/*rgb(157,220,21)
+rgb(255,213,57)
+rgb(245,143,32)
+rgb(202,32,77)*/

@@ -1,5 +1,5 @@
 <div id="grid" class="grid">
-  <div class="cell" *ngFor="let cell of gridData; let i = index; trackBy: trackByFn" [attr.age]="cell" (click)="toggle(cell,i)">
+  <div class="cell" *ngFor="let cell of gridData; let i = index; trackBy: trackByFn" [attr.ant]="cell.ant" [attr.pher]="getPher(cell)" (click)="placeAnt(i)">
   </div>
 </div>
 <div class="controls">
