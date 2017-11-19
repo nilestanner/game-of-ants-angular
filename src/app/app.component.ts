@@ -40,7 +40,6 @@ export class AppComponent {
   }
 
   step() {
-    console.log('step');
     this.producePheromone();
     this.moveAnts();
   }
@@ -53,11 +52,11 @@ export class AppComponent {
       this.gridData[ant.position].pheromone[ant.id] += 1;
       this.positions.forEach((position) => {
         const pos = ant.position + position;
-        if (pos >= 0 && pos <= 10000) {
+        if (pos >= 0 && pos < 10000) {
           if (!this.gridData[pos].pheromone[ant.id]) {
             this.gridData[pos].pheromone[ant.id] = 0;
           }
-          this.gridData[pos].pheromone[ant.id] += 0.5;
+          this.gridData[pos].pheromone[ant.id] += 0.1;
         }
       });
     });
@@ -76,10 +75,10 @@ export class AppComponent {
       shuffle(this.positions);
       this.positions.forEach((position) => {
         const pos = ant.position + position;
-        if (pos >= 0 && pos <= 10000) {
+        if (pos >= 0 && pos < 10000) {
           let posValue = -Infinity;
           if (!this.gridData[pos].ant) {
-            posValue = (this.gridData[pos].pheromone['total'] - 2 * this.gridData[pos].pheromone[ant.id])
+            posValue = (this.gridData[pos].pheromone['total'] - 10 * this.gridData[pos].pheromone[ant.id]);
           }
           if (posValue > moveToValue) {
             moveToValue = posValue;
@@ -96,62 +95,13 @@ export class AppComponent {
   }
 
   getPher(cell) {
-    const total = Object.keys(cell.pheromone).map((key => cell.pheromone[key])).reduce((a, b) => {
+    const total = Object.keys(cell.pheromone).filter((key) => key !== 'total').map((key => cell.pheromone[key])).reduce((a, b) => {
       return a + b;
     }, 0);
     cell.pheromone['total'] = total;
     return total;
   }
 
-  // toggle(age, index) {
-  //   if (this.gridData[index].ant) {
-  //     this.gridData[index].ant
-  //   }
-  //   this.gridData[index] = age ? 0 : 1;
-  // }
-  //
-  // step() {
-  //   const oldData = this.gridData.slice();
-  //   for (let i = 0, len = this.gridData.length; i < len; i++){
-  //     const alive = this.checkLife(i, oldData);
-  //     if (oldData[i]){
-  //       if (alive){
-  //         if (oldData[i] < 4){
-  //           const age = oldData[i] + 1;
-  //           this.gridData[i] = age;
-  //         }
-  //       }else{
-  //         this.gridData[i] = 0;
-  //       }
-  //     }else{
-  //       if (alive){
-  //         this.gridData[i] = 1;
-  //       }
-  //     }
-  //   }
-  //   ++this.steps;
-  // }
-  //
-  // checkLife(index, data) {
-  //   let neighbors = 0;
-  //   for (let j = 0, lenj = this.posistions.length; j < lenj; j++){
-  //     if (data[index + this.posistions[j]]){
-  //       neighbors++;
-  //       if (neighbors === 4){
-  //         j = lenj;
-  //       }
-  //     }
-  //   }
-  //   switch (neighbors){
-  //     case 2:
-  //       return data[index];
-  //     case 3:
-  //       return 1;
-  //     default:
-  //       return 0;
-  //   }
-  // }
-  //
   run() {
     this.running = true;
     let frames = 0;
@@ -194,6 +144,7 @@ export class AppComponent {
 
   reset() {
     this.gridData = Array(10000).fill(0).map((i) => {return {ant: false, pheromone: {}}; });
+    this.ants = [];
     this.steps = 0;
     this.fps = 0;
   }
